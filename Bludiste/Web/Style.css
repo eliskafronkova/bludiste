@@ -1,0 +1,228 @@
+/* Obecné nastavení */
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* Hlavička */
+header {
+    background: #111;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+/* Navigace */
+nav {
+    background: #222;
+    padding: 0.5rem 0;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+nav .hamburger {
+    display: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #bd00ff; /* Neonová fialová barva */
+    padding: 0 1rem;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #bd00ff; /* Neonová fialová barva */
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #fff;
+}
+
+nav ul.expanded {
+    display: block;
+    text-align: center;
+}
+
+nav ul.expanded li {
+    margin: 10px 0;
+}
+
+/* Změna zobrazení na menších zařízeních */
+@media (max-width: 768px) {
+    nav .hamburger {
+        display: block;
+    }
+
+    nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    nav ul.expanded {
+        display: flex;
+    }
+}
+
+/* Hlavní obsah */
+main {
+    padding: 20px;
+    max-width: 1000px;
+    margin: 20px auto;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+main h2 {
+    margin-top: 0;
+    color: #111;
+    font-weight: bold;
+}
+
+/* Formuláře */
+form {
+    background: #f9f9f9;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="email"],
+form button {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+form button {
+    background: #111;
+    color: #bd00ff; /* Neonová fialová barva */
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+form button:hover {
+    background: #bd00ff;
+    color: #111;
+}
+
+/* Tabulky */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+table th,
+table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background: #111;
+    color: #bd00ff; /* Neonová fialová barva */
+    font-weight: bold;
+}
+
+table tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+table tr:hover {
+    background: #f1f1f1;
+}
+
+/* Tlačítka */
+button {
+    background: #111;
+    color: #bd00ff; /* Neonová fialová barva */
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+button:hover {
+    background: #bd00ff;
+    color: #111;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 10px;
+    background: #222;
+    color: #fff;
+    margin-top: 20px;
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: #bd00ff; /* Neonová fialová barva */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Responzivita */
+@media (max-width: 768px) {
+    main {
+        padding: 10px;
+    }
+
+    form input[type="text"],
+    form input[type="password"],
+    form button {
+        font-size: 0.9rem;
+    }
+}

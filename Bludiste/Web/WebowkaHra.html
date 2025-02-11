@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program Info</title>
+    <link rel="stylesheet" href="Style.css">
+    <script> //definuje  JAVASCRIPT funkci checkAccess
+            //KONTROLA P5IHLASENI A REGISTRACE
+
+        function toggleMenu() {
+            const navList = document.querySelector("nav ul");
+            navList.classList.toggle("expanded");   
+        }
+
+        function checkAccess(action) {
+            // Volání backendu by vypadalo jako fetch('/api/check-auth')
+            const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+            const isRegistered = localStorage.getItem("isRegistered") === "true";
+
+            if (!isLoggedIn) {
+                if (confirm("Chcete se přihlásit?")) {
+                    window.location.href = "prihlaseni.html";
+                }
+                return;
+            }
+
+            if (!isRegistered) {
+                if (confirm("Chcete se zaregistrovat?")) {
+                    window.location.href = "registrace.html";
+                }
+                return;
+            }
+
+            if (action === 'play') {
+                window.location.href = "hrat.html";
+            }
+
+        }
+    </script>
+</head>
+<body>
+    <iframe src="header.html" width="100%" height="100%" frameborder="0" scrolling="no" sandbox="allow-popups"></iframe>
+    
+    <main>         
+    <!-- Obsah stránek bude záležet na odkazech výše -->
+    <p>Bludiště hra je zábavná a náročná hra, ve které se hráči snaží najít cestu ven z bludiště...</p>
+
+    </main>
+    <footer>
+        <p>Eliška Froňková IT4</p>
+        <a href="https://github.com/uzivatelsky-projekt" target= "_blank" rel="noopener noreferrer">GitHub projekt</a>
+    </footer>
+
+</body>
+</html>
