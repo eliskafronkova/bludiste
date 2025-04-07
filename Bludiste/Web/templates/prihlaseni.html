@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Style.css') }}">
+    <title>Přihlášení</title>
+</head>
+<body>
+    <header>
+        <h1>Bludiště hra</h1>
+        <nav>
+            <div class="hamburger" onclick="toggleMenu()">☰</div>
+            <ul>
+                <li><a href="{{ url_for('o_hre') }}">O hře</a></li>
+                <li><a href="{{ url_for('scoreboard') }}">Scoreboard</a></li>
+                {% if 'user_id' not in session %}
+                    <li><a href="{{ url_for('prihlaseni') }}">Přihlášení</a></li>
+                    <li><a href="{{ url_for('registrace') }}">Registrace</a></li>
+                {% else %}
+                    {% if session.get('is_admin') %}
+                        <li><a href="{{ url_for('admhraci') }}">Administrace hráčů</a></li>
+                    {% endif %}
+                    <li><a href="{{ url_for('odhlaseni') }}">Odhlásit se</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <form action="/prihlaseni" method="POST">
+        <h2>Přihlášení</h2>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+                {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% endwith %}
+        <label for="username">Uživatelské jméno:</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">Heslo:</label>
+        <input type="password" id="password" name="password" required>
+        <button type="submit">Přihlásit se</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Style.css') }}">
+    <title>Seznam hráčů</title>
+</head>
+<body>
+    <header>
+        <h1>Seznam hráčů</h1>
+        <nav>
+            <div class="hamburger" onclick="toggleMenu()">☰</div>
+            <ul>
+                <li><a href="{{ url_for('o_hre') }}">O hře</a></li>
+                <li><a href="{{ url_for('scoreboard') }}">Scoreboard</a></li>
+                {% if 'user_id' not in session %}
+                    <li><a href="{{ url_for('prihlaseni') }}">Přihlášení</a></li>
+                    <li><a href="{{ url_for('registrace') }}">Registrace</a></li>
+                {% else %}
+                    {% if session.get('is_admin') %}
+                        <li><a href="{{ url_for('admhraci') }}">Administrace hráčů</a></li>
+                    {% endif %}
+                    <li><a href="{{ url_for('odhlaseni') }}">Odhlásit se</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Uživatelské jméno</th>
+                <th>Heslo</th>
+                <th>Admin</th>
+                <th>Akce</th>
+            </tr>
+            {% if players %}
+                {% for player in players %}
+                <tr>
+                    <td>{{ player[0] }}</td>
+                    <td>{{ player[1] }}</td>
+                    <td>{{ player[2] }}</td>
+                    <td>{{ 'Ano' if player[3] else 'Ne' }}</td>
+                    <td>
+                        <div class="action-buttons">
+                            <!-- Tlačítko Toggle Admin -->
+                            <form action="{{ url_for('toggle_admin', player_id=player[0]) }}" method="post">
+                                <button type="submit" onclick="return confirm(
+                                    'Opravdu chcete změnit stav administrátora pro hráče {{ player[1] }}?\n\n' +
+                                    'Pokud odeberete administrátorská práva sobě, nebudete je moci vrátit. ' +
+                                    'Tuto akci musí provést jiný administrátor.'
+                                );">
+                                    {% if player[3] %}
+                                        Odeber Adm
+                                    {% else %}
+                                        Přidej Adm
+                                    {% endif %}
+                                </button>
+                            </form>
+                            <!-- Tlačítko Score -->
+                            <form action="{{ url_for('player_records', idhrace=player[0]) }}" method="get">
+                                <button type="submit">Score</button>
+                            </form>
+                            <!-- Tlačítko Delete -->
+                            <form action="{{ url_for('delete_player', player_id=player[0]) }}" method="post">
+                                <button type="submit" onclick="return confirm(
+                                    'Opravdu chcete smazat hráče {{ player[1] }} a všechny jeho údaje?\n\n' +
+                                    'Tato akce je nevratná.'
+                                );">Smazat</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="5">Žádní hráči k zobrazení.</td>
+                </tr>
+            {% endif %}
+        </table>
+    </main>
+</body>
+</html>

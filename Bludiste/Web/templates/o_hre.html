@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Style.css') }}">
+    <title>O hře</title>
+</head>
+<body>
+    <header>
+        <h1>Bludiště hra</h1>
+        <nav>
+            <div class="hamburger" onclick="toggleMenu()">☰</div>
+            <ul>
+                <li><a href="{{ url_for('o_hre') }}">O hře</a></li>
+                <li><a href="{{ url_for('scoreboard') }}">Scoreboard</a></li>
+                {% if 'user_id' not in session %}
+                    <li><a href="{{ url_for('prihlaseni') }}">Přihlášení</a></li>
+                    <li><a href="{{ url_for('registrace') }}">Registrace</a></li>
+                {% else %}
+                    {% if session.get('is_admin') %}
+                        <li><a href="{{ url_for('admhraci') }}">Administrace hráčů</a></li>
+                    {% endif %}
+                    <li><a href="{{ url_for('odhlaseni') }}">Odhlásit se</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <h2>O programu</h2>
+    <p>Hra s více levely, ve které procházíte bludištěm a snažíte se za nejlepší čas dostat do cíle.</p>
+    <h3>Funkce:</h3>
+    <ul>
+        <li>Přihlášení</li>
+        <li>Výběr z 10 levelů</li>
+        <li>Snaha se dostat do cíle za co nejkratší čas</li>
+        <li>Vypsání výsledků</li>
+    </ul>
+</body>
+</html>

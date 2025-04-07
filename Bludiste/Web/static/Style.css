@@ -37,7 +37,7 @@ nav .hamburger {
     cursor: pointer;
     color: #bd00ff; /* Neonová fialová barva */
     padding: 0 1rem;
-}
+}/*hhhhhhhhhhhhhhhhhhhhhhhhhhhh*/
 
 nav ul {
     list-style: none;
@@ -153,27 +153,43 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
+    background: #fff; /* Bílý podklad */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Jemný stín */
+    border-radius: 8px; /* Zaoblené rohy */
+    overflow: hidden; /* Skryje přetečení */
 }
 
 table th,
 table td {
-    padding: 10px;
+    padding: 15px; /* Zvýšené odsazení pro lepší čitelnost */
     text-align: left;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #ddd; /* Jemné oddělení řádků */
+    font-size: 1rem; /* Větší text */
 }
 
 table th {
-    background: #111;
-    color: #bd00ff; /* Neonová fialová barva */
+    background: #111; /* Tmavé pozadí pro hlavičku */
+    color: #bd00ff; /* Neonová fialová barva textu */
     font-weight: bold;
+    text-transform: uppercase; /* Velká písmena */
+    letter-spacing: 1px; /* Zvýšené mezery mezi písmeny */
 }
 
 table tr:nth-child(even) {
-    background: #f9f9f9;
+    background: #f9f9f9; /* Světle šedé pozadí pro sudé řádky */
 }
 
 table tr:hover {
-    background: #f1f1f1;
+    background: #f1f1f1; /* Zvýraznění při najetí myší */
+    transition: background 0.3s ease; /* Plynulý přechod */
+}
+
+table td {
+    color: #333; /* Tmavší text pro buňky */
+}
+
+table tr:last-child td {
+    border-bottom: none; /* Odstranění spodního okraje u posledního řádku */
 }
 
 /* Tlačítka */
@@ -225,4 +241,30 @@ footer a:hover {
     form button {
         font-size: 0.9rem;
     }
+}
+
+.action-buttons {
+    display: flex; /* Zajistí, že tlačítka budou vedle sebe */
+    gap: 10px; /* Mezera mezi tlačítky */
+}
+
+form {
+    display: inline; /* Zajistí, že formuláře budou vedle sebe */
+}
+
+button {
+    background: #111; /* Černé pozadí */
+    color: #bd00ff; /* Neonová fialová barva */
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+button:hover {
+    background: #bd00ff;
+    color: #111;
 }

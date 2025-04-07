@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Style.css') }}">
+    <title>Scoreboard</title>
+</head>
+<body>
+    <header>
+        <h1>Bludiště hra</h1>
+        <nav>
+            <div class="hamburger" onclick="toggleMenu()">☰</div>
+            <ul>
+                <li><a href="{{ url_for('o_hre') }}">O hře</a></li>
+                <li><a href="{{ url_for('scoreboard') }}">Scoreboard</a></li>
+                {% if 'user_id' not in session %}
+                    <li><a href="{{ url_for('prihlaseni') }}">Přihlášení</a></li>
+                    <li><a href="{{ url_for('registrace') }}">Registrace</a></li>
+                {% else %}
+                    {% if session.get('is_admin') %}
+                        <li><a href="{{ url_for('admhraci') }}">Administrace hráčů</a></li>
+                    {% endif %}
+                    <li><a href="{{ url_for('odhlaseni') }}">Odhlásit se</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        <header>
+        <table>
+            <tr>
+                <th>Čas</th>
+                <th>Level</th>
+            </tr>
+            {% if scores %}
+                {% for score in scores %}
+                <tr>
+                    <td>{{ score[0] }}</td>
+                    <td>{{ score[1] }}</td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="2">Žádné záznamy k zobrazení.</td>
+                </tr>
+            {% endif %}
+        </table>
+</body>
+</html>
