@@ -16,6 +16,14 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 
+#barvičky
+white = (255,255,255)
+black = (0,0,0)
+blue = (0,0,255)
+green = (0,255,0)
+cyan = (0,204,204)
+red = (255,0,0)
+
 class TimeMazeC:
     def __init__(self, id, user_id, time, level):
         self.id = id
@@ -74,14 +82,6 @@ def uloz_score(cas, level):
 
     except mysql.connector.Error as err:
         print(f"Error: {err}")
-
-#barvičky
-white = (255,255,255)
-black = (0,0,0)
-blue = (0,0,255)
-green = (0,255,0)
-cyan = (0,204,204)
-red = (255,0,0)
 
 #Vše o okně
 class Window:
@@ -153,8 +153,21 @@ class Button:
         
         else:
             return False
+
         
-# přihlášení
+# hledání pozice hráče 
+def najit_pozici(mapa, cislo, osa):
+     for row in range(len(mapa)):
+        for col in range(len(mapa[row])):
+            if cislo == mapa[row][col]:
+                if osa == "y":
+                    return row
+                if osa == "x":
+                    return col
+                else:
+                    print ("Error Osa")
+
+
 class TextField:
     def __init__(self, x, y, widht, height, placeholder="", is_password=False, font= mini_font, text_color= white, box_color_active= green, box_color_inactive= blue):
         self.rect = pygame.Rect(x, y, widht, height)
@@ -199,9 +212,6 @@ class TextField:
         else:
             display_text = self.placeholder
 
-        """color = self.text_color if self.text else (150, 150, 150)"""
-
-        
         txt_surface = self.font.render(display_text, True, self.text_color)
         screen.blit(txt_surface, (self.rect.x + 5, self.rect.y + 10))
         pygame.draw.rect(screen, self.color, self.rect, 2)
@@ -213,22 +223,8 @@ class TextField:
                                  (self.eye_rect.left, self.eye_rect.top), 
                                  (self.eye_rect.right, self.eye_rect.bottom), 2)
 
-
     def get_text(self):
         return self.text
-
-        
-# hledání pozice hráče 
-def najit_pozici(mapa, cislo, osa):
-     for row in range(len(mapa)):
-        for col in range(len(mapa[row])):
-            if cislo == mapa[row][col]:
-                if osa == "y":
-                    return row
-                if osa == "x":
-                    return col
-                else:
-                    print ("Error Osa")
 
 scroll_offset = 0  
 
@@ -250,7 +246,6 @@ def score():
     GameState = GameStates.in_score  # Přepne stav hry na obrazovku skóre
 
 def zobrazit_tabulku(data, headers, x, y, cell_width, cell_height, font=mini_font, text_color=white, header_color=cyan, line_color=blue):
-
     # Zobrazení záhlaví
     for col_index, header in enumerate(headers):
         header_rect = pygame.Rect(x + col_index * cell_width, y, cell_width, cell_height)
@@ -349,7 +344,7 @@ def next_level():
         CisloRunLevelu += 1
         spusteni_levelu()
 
-password_wrong = False    
+password_wrong = False
 def prihlaseni():
     global password_wrong
     if con_prihlaseni(username_field.text, password_field.text):

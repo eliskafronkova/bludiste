@@ -8,11 +8,6 @@
     <script> //definuje  JAVASCRIPT funkci checkAccess
             //KONTROLA P5IHLASENI A REGISTRACE
 
-        function toggleMenu() {
-            const navList = document.querySelector("nav ul");
-            navList.classList.toggle("expanded");   
-        }
-
         function checkAccess(action) {
             // Volání backendu by vypadalo jako fetch('/api/check-auth')
             const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
